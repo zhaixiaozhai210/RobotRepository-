@@ -61,7 +61,7 @@ int main() {
 
     for (int i = 0; i < 608 * 480; ++i) {
         int k = 608;
-        int HarrisCount;
+        int HarrisCount = 0;
         if (vecIntA[i] == 1) {
             //right
             HarrisCount = abs(vecIntA[i + k] - vecIntA[i + k - 1]) +
@@ -73,9 +73,83 @@ int main() {
                           abs(vecIntA[i - k] - vecIntA[i - k - 1]) +
                           abs(vecIntA[i - k + 1] - vecIntA[i - k]) +
                           abs(vecIntA[i - k + 2] - vecIntA[i - k + 1]);
+            //left
+            HarrisCount += abs(vecIntA[i + k - 2] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i + k - 1] - vecIntA[i + k]) +
+                           abs(vecIntA[i + k] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i - 2] - vecIntA[i - 1]) +
+                           abs(vecIntA[i - 1] - vecIntA[i]) +
+                           abs(vecIntA[i] - vecIntA[i + 1]) +
+                           abs(vecIntA[i - k - 2] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i - k - 1] - vecIntA[i - k]) +
+                           abs(vecIntA[i - k] - vecIntA[i - k + 1]);
+            //top
+            HarrisCount += abs(vecIntA[i + 2 * k - 1] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i + 2 * k] - vecIntA[i + k]) +
+                           abs(vecIntA[i + 2 * k + 1] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i + k - 1] - vecIntA[i - 1]) +
+                           abs(vecIntA[i + k] - vecIntA[i]) +
+                           abs(vecIntA[i + k + 1] - vecIntA[i + 1]) +
+                           abs(vecIntA[i - 1] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i] - vecIntA[i - k]) +
+                           abs(vecIntA[i + 1] - vecIntA[i - k + 1]);
+            //bottom
+            HarrisCount += abs(vecIntA[i - 1] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i] - vecIntA[i + k]) +
+                           abs(vecIntA[i + 1] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i - k - 1] - vecIntA[i - 1]) +
+                           abs(vecIntA[i - k] - vecIntA[i]) +
+                           abs(vecIntA[i - k + 1] - vecIntA[i + 1]) +
+                           abs(vecIntA[i - 2 * k - 1] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i - 2 * k] - vecIntA[i - k]) +
+                           abs(vecIntA[i - 2 * k + 1] - vecIntA[i - k + 1]);
             //right and top
-            if (HarrisCount >= 3) {
-                cout << myCount << endl;
+            HarrisCount += abs(vecIntA[i + 2 * k] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i + 2 * k + 1] - vecIntA[i + k]) +
+                           abs(vecIntA[i + 2 * k + 2] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i + k] - vecIntA[i - 1]) +
+                           abs(vecIntA[i + k + 1] - vecIntA[i]) +
+                           abs(vecIntA[i + k + 2] - vecIntA[i + 1]) +
+                           abs(vecIntA[i] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i + 1] - vecIntA[i - k]) +
+                           abs(vecIntA[i + 2] - vecIntA[i - k + 1]);
+            //left and top
+            HarrisCount += abs(vecIntA[i + 2 * k - 2] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i + 2 * k - 1] - vecIntA[i + k]) +
+                           abs(vecIntA[i + 2 * k] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i + k - 2] - vecIntA[i - 1]) +
+                           abs(vecIntA[i + k - 1] - vecIntA[i]) +
+                           abs(vecIntA[i + k] - vecIntA[i + 1]) +
+                           abs(vecIntA[i - 2] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i - 1] - vecIntA[i - k]) +
+                           abs(vecIntA[i] - vecIntA[i - k + 1]);
+            //right and bottom
+            HarrisCount += abs(vecIntA[i] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i + 1] - vecIntA[i + k]) +
+                           abs(vecIntA[i + 2] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i - k] - vecIntA[i - 1]) +
+                           abs(vecIntA[i - k + 1] - vecIntA[i]) +
+                           abs(vecIntA[i - k + 2] - vecIntA[i + 1]) +
+                           abs(vecIntA[i - 2 * k] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i - 2 * k + 1] - vecIntA[i - k]) +
+                           abs(vecIntA[i - 2 * k + 2] - vecIntA[i - k + 1]);
+            //left and bottom
+            HarrisCount += abs(vecIntA[i - 2] - vecIntA[i + k - 1]) +
+                           abs(vecIntA[i - 1] - vecIntA[i + k]) +
+                           abs(vecIntA[i] - vecIntA[i + k + 1]) +
+                           abs(vecIntA[i - k - 2] - vecIntA[i - 1]) +
+                           abs(vecIntA[i - k - 1] - vecIntA[i]) +
+                           abs(vecIntA[i - k] - vecIntA[i + 1]) +
+                           abs(vecIntA[i - 2 * k - 2] - vecIntA[i - k - 1]) +
+                           abs(vecIntA[i - 2 * k - 1] - vecIntA[i - k]) +
+                           abs(vecIntA[i - 2 * k] - vecIntA[i - k + 1]);
+            //阈值设置
+            if (HarrisCount >= 23) {
+//                cout << myCount << endl;
+                int my_X = myCount % 608;
+                int my_Y = myCount / 608;
+                cout << my_X <<  endl;
+                cout << my_Y <<  endl;
             }
         }
         myCount++;
